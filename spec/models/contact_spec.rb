@@ -20,7 +20,19 @@ describe Contact do
 
   it "is invalid without an email address"
 
-  it "is invalid with a duplicate email address"
+  it "is invalid with a duplicate email address" do
+    Contact.create(
+      firstname: 'Joe',
+      lastname: 'Tester',
+      email: 'tester@example.com')
+
+    contact = Contact.new(
+      firstname: 'Jane',
+      lastname: 'Tester',
+      email: 'tester@example.com')
+
+    expect(contact).to have(1).errors_on(:email)
+  end
 
   it "returns a contact's full name as a string"
 end
