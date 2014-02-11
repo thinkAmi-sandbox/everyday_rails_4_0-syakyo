@@ -34,5 +34,11 @@ describe Contact do
     expect(contact).to have(1).errors_on(:email)
   end
 
-  it "returns a contact's full name as a string"
+  it "returns a contact's full name as a string" do
+    contact = Contact.new(firstname: 'John',
+                          lastname: 'Doe',
+                          email: 'johndoe@example.com')
+
+    expect(contact.name).to eq 'John Doe'
+  end
 end
