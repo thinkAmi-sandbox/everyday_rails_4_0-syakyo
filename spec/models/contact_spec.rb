@@ -16,17 +16,20 @@ describe Contact do
 
 
   it "is invalid without a firstname" do
-    expect(Contact.new(firstname: nil)).to have(1).errors_on(:firstname)
+    contact = FactoryGirl.build(:contact, firstname: nil)
+    expect(contact).to have(1).errors_on(:firstname)
   end
 
 
   it "is invalid without a lastname" do
-    expect(Contact.new(lastname: nil)).to have(1).errors_on(:lastname)
+    contact = FactoryGirl.build(:contact, lastname: nil)
+    expect(contact).to have(1).errors_on(:lastname)
   end
 
 
   it "is invalid without an email address" do
-    expect(Contact.new(email: nil)).to have(1).errors_on(:email)
+    contact = FactoryGirl.build(:contact, email: nil)
+    expect(contact).to have(1).errors_on(:email)
   end
 
 
@@ -46,9 +49,9 @@ describe Contact do
 
 
   it "returns a contact's full name as a string" do
-    contact = Contact.new(firstname: 'John',
-                          lastname:  'Doe',
-                          email:     'johndoe@example.com')
+    contact = FactoryGirl.build(:contact,
+                                firstname: 'John',
+                                lastname:  'Doe')
 
     expect(contact.name).to eq 'John Doe'
   end
