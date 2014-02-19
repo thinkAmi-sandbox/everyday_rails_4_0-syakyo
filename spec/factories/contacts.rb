@@ -13,5 +13,10 @@ FactoryGirl.define do
                                             contact: contact)
       end
     end
+
+
+    factory :invalid_contact do
+      firstname nil
+    end
   end
 end
