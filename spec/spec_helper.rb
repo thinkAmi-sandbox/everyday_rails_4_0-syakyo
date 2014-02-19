@@ -41,5 +41,5 @@ RSpec.configure do |config|
   config.order = "random"
 
   # Include FactoryGirl
-  config.include FactoryGirl::Syntax::Methods
+  # config.include FactoryGirl::Syntax::Methods
 end

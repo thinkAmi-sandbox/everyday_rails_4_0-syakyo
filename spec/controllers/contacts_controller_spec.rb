@@ -57,16 +57,34 @@ describe ContactsController do
 
 
   describe 'GET #new' do
-    it "assigns a new Contact to @contact"
+    it "assigns a new Contact to @contact" do
+      get :new
 
-    it "renders the :new template"
+      expect(assigns(:contact)).to be_a_new(Contact)
+    end
+
+    it "renders the :new template" do
+      get :new
+
+      expect(response).to render_template :new
+    end
   end
 
 
   describe 'GET #edit' do
-    it "assigns the requested contact to @contact"
+    it "assigns the requested contact to @contact" do
+      contact = FactoryGirl.create(:contact)
+      get :edit, id: contact
 
-    it "renders the :edit template"
+      expect(assigns(:contact)).to eq contact
+    end
+
+    it "renders the :edit template" do
+      contact = FactoryGirl.create(:contact)
+      get :edit, id: contact
+
+      expect(response).to render_template :edit
+    end
   end
 
 
