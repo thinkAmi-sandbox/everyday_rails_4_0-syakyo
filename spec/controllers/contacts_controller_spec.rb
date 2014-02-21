@@ -197,8 +197,19 @@ describe ContactsController do
 
 
   describe 'DELETE #update' do
-    it "deletes the contact from the database"
+    before :each do
+      @contact = FactoryGirl.create(:contact)
+    end
 
-    it "redirects to contacts#index"
+    it "deletes the contact" do
+      expect{
+        delete :destroy, id: @contact
+      }.to change(Contact, :count).by(-1)
+    end
+
+    it "redirects to contacts#index" do
+      delete :destroy, id: @contact
+      expect(response).to redirect_to contacts_url
+    end
   end
 end
