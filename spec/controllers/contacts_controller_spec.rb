@@ -134,10 +134,41 @@ describe ContactsController do
 
 
   describe 'PUT #update' do
-    context "with valid attributes" do
-      it "updates the contact in the database"
+    before :each do
+      @contact = FactoryGirl.create(:contact,
+                                    firstname: 'Lawrence',
+                                    lastname:  'Smith')
+    end
 
-      it "redirects to the contact"
+    context "valid attributes" do
+      it "located the requested @contact" do
+        patch :update,
+              id: @contact,
+              contact: FactoryGirl.attributes_for(:contact)
+
+        expect(assigns(:contact)).to eq(@contact)
+      end
+
+
+      it "changes @contact's attributes"  do
+        patch :update,
+              id: @contact,
+              contact: FactoryGirl.attributes_for(:contact,
+                                                  firstname: "Larry",
+                                                  lastname:  "Smith")
+        @contact.reload
+
+        expect(@contact.firstname).to eq("Larry")
+        expect(@contact.lastname).to eq("Smith")
+      end
+
+
+      it "redirects to the updated contact" do
+        patch :update,
+              id: @contact,
+              contact: FactoryGirl.attributes_for(:contact)
+        expect(response).to redirect_to @contact
+      end
     end
 
 
@@ -150,7 +181,7 @@ describe ContactsController do
   end
 
 
-  describe 'PUT #update' do
+  describe 'DELETE #update' do
     it "deletes the contact from the database"
 
     it "redirects to contacts#index"
