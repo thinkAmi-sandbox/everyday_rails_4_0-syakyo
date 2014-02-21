@@ -173,10 +173,25 @@ describe ContactsController do
 
 
     context "with invalid attributes" do
-      it "does not update the contact"
+      it "does not update the contact's attributes" do
+        patch :update,
+              id: @contact,
+              contact: FactoryGirl.attributes_for(:contact,
+                                                  firstname: "Larry",
+                                                  lastname:  nil)
+        @contact.reload
+
+        expect(@contact.firstname).to_not eq("Larry")
+        expect(@contact.lastname).to eq("Smith")
+      end
 
 
-      it "re-renders the :edit template"
+      it "re-renders the :edit template" do
+        patch :update,
+              id: @contact,
+              contact: FactoryGirl.attributes_for(:invalid_contact)
+        expect(response).to render_template :edit
+      end
     end
   end
 
