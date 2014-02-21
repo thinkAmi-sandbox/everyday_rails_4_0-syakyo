@@ -117,9 +117,18 @@ describe ContactsController do
 
 
     context "with invalid attributes" do
-      it "does not save the new contact in the database"
+      it "does not save the new contact in the database" do
+        expect{
+          post :create,
+               contact: FactoryGirl.attributes_for(:invalid_contact)
+        }.to_not change(Contact, :count)
+      end
 
-      it "renders the :new template"
+      it "renders the :new template" do
+        post :create,
+             contact: FactoryGirl.attributes_for(:invalid_contact)
+        expect(response).to render_template :new
+      end
     end
   end
 
