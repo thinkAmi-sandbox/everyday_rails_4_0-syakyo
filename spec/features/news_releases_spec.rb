@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature "News releases", focus: true do
+feature "News releases" do
   context "as a user" do
     scenario "adds a news release" do
       user = FactoryGirl.create(:user)

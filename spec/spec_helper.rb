@@ -53,5 +53,5 @@ RSpec.configure do |config|
 
   config.include LoginMacros
 
-  config.filter_run focus: true
+  # config.filter_run focus: true
 end

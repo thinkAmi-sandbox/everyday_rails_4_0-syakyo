@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe NewsReleasesController, focus: true do
+describe NewsReleasesController do
   describe 'GET #new' do
     it "requires login" do
       get :new
