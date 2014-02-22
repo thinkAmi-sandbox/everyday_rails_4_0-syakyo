@@ -5,9 +5,9 @@ FactoryGirl.define do
     email { Faker::Internet.email }
     password 'secret'
     password_confirmation 'secret'
-  end
 
-  factory :admin do
-    admin true
+    factory :admin do
+      admin true
+    end
   end
 end
