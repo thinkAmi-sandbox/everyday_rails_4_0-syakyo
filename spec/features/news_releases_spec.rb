@@ -12,13 +12,13 @@ feature "News releases", focus: true do
       click_link "Add News Release"
 
       fill_in "Date",  with: "2013-07-29"
-      fill_in "Title", with: "BigCo siwtches to Rails"
+      fill_in "Title", with: "BigCo switches to Rails"
       fill_in "Body",  with: "BigCo has released a new website built with open source."
       click_button "Create News release"
 
       expect(current_path).to eq news_releases_path
       expect(page).to have_content "Successfully created news release."
-      expect(page).to have_content "2013-07-29: BigCo siwtches to Rails"
+      expect(page).to have_content "2013-07-29: BigCo switches to Rails"
     end
   end
 
