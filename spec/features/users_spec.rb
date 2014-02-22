@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 feature 'User management' do
-  scenario "adds a new user" do
+  scenario "adds a new user", js: true do
     admin = FactoryGirl.create(:admin)
     sign_in admin
 
