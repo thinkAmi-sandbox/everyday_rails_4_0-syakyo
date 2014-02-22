@@ -59,6 +59,35 @@ describe ContactsController do
         expect(response).to render_template :show
       end
     end
+
+
+    describe 'GET #show by test doubles' do
+      let(:contact_doubles) { FactoryGirl.build_stubbed(:contact,
+                                                firstname: 'lastname',
+                                                lastname:  'Smith') }
+      before :each do
+        allow(contact_doubles).to receive(:persisted?).and_return(true)
+        allow(Contact).to receive(:order).with('lastname, firstname')
+                                         .and_return([contact_doubles])
+        allow(Contact).to receive(:find).with(contact_doubles.id.to_s)
+                                        .and_return(contact_doubles)
+        allow(contact_doubles).to receive(:save).and_return(true)
+      end
+
+      before :each do
+        allow(Contact).to receive(:find).with(contact_doubles.id.to_s)
+                                        .and_return(contact_doubles)
+        get :show, id: contact_doubles
+      end
+
+      it "assigns the requested contact to @contact" do
+        expect(assigns(:contact)).to eq contact_doubles
+      end
+
+      it "renders the :show template" do
+        expect(response).to render_template :show
+      end
+    end
   end
 
 
