@@ -8,4 +8,8 @@ describe NewsRelease, focus: true do
 
     expect(news_release.title_with_date).to eq '2013-07-31: BigCo hires new CEO'
   end
+
+  it { should validate_presence_of :released_on }
+  it { should validate_presence_of :title }
+  it { should validate_presence_of :body }
 end
