@@ -16,7 +16,7 @@ feature "News releases", focus: true do
       fill_in "Body",  with: "BigCo has released a new website built with open source."
       click_button "Create News release"
 
-      expect(current_path).to eq news_release_path
+      expect(current_path).to eq news_releases_path
       expect(page).to have_content "Successfully created news release."
       expect(page).to have_content "2013-07-29: BigCo siwtches to Rails"
     end
