@@ -1,6 +1,13 @@
 require 'spec_helper'
 
 describe ContactsController do
+  let(:contact) do
+    FactoryGirl.create(:contact,
+                       firstname: 'Lawrence',
+                       lastname:  'Smith')
+  end
+
+
   shared_examples("public access to contacts") do
     describe 'GET #index' do
       context 'with param[:letter]' do
@@ -40,15 +47,13 @@ describe ContactsController do
 
 
     describe 'GET #show' do
-      it "assigns the requested contact to @contact" do
-        contact = FactoryGirl.create(:contact)
+      it "assigns the requested contact to contact" do
         get :show, id: contact
 
         expect(assigns(:contact)).to eq contact
       end
 
       it "renders the :show template" do
-        contact = FactoryGirl.create(:contact)
         get :show, id: contact
 
         expect(response).to render_template :show
@@ -74,15 +79,13 @@ describe ContactsController do
 
 
     describe 'GET #edit' do
-      it "assigns the requested contact to @contact" do
-        contact = FactoryGirl.create(:contact)
+      it "assigns the requested contact to contact" do
         get :edit, id: contact
 
         expect(assigns(:contact)).to eq contact
       end
 
       it "renders the :edit template" do
-        contact = FactoryGirl.create(:contact)
         get :edit, id: contact
 
         expect(response).to render_template :edit
@@ -136,40 +139,35 @@ describe ContactsController do
 
 
     describe 'PATCH #update' do
-      before :each do
-        @contact = FactoryGirl.create(:contact,
-                                      firstname: 'Lawrence',
-                                      lastname:  'Smith')
-      end
 
       context "valid attributes" do
-        it "located the requested @contact" do
+        it "located the requested contact" do
           patch :update,
-                id: @contact,
+                id: contact,
                 contact: FactoryGirl.attributes_for(:contact)
 
-          expect(assigns(:contact)).to eq(@contact)
+          expect(assigns(:contact)).to eq(contact)
         end
 
 
-        it "changes @contact's attributes"  do
+        it "changes contact's attributes"  do
           patch :update,
-                id: @contact,
+                id: contact,
                 contact: FactoryGirl.attributes_for(:contact,
                                                     firstname: "Larry",
                                                     lastname:  "Smith")
-          @contact.reload
+          contact.reload
 
-          expect(@contact.firstname).to eq("Larry")
-          expect(@contact.lastname).to eq("Smith")
+          expect(contact.firstname).to eq("Larry")
+          expect(contact.lastname).to eq("Smith")
         end
 
 
         it "redirects to the updated contact" do
           patch :update,
-                id: @contact,
+                id: contact,
                 contact: FactoryGirl.attributes_for(:contact)
-          expect(response).to redirect_to @contact
+          expect(response).to redirect_to contact
         end
       end
 
@@ -177,20 +175,20 @@ describe ContactsController do
       context "with invalid attributes" do
         it "does not update the contact's attributes" do
           patch :update,
-                id: @contact,
+                id: contact,
                 contact: FactoryGirl.attributes_for(:contact,
                                                     firstname: "Larry",
                                                     lastname:  nil)
-          @contact.reload
+          contact.reload
 
-          expect(@contact.firstname).to_not eq("Larry")
-          expect(@contact.lastname).to eq("Smith")
+          expect(contact.firstname).to_not eq("Larry")
+          expect(contact.lastname).to eq("Smith")
         end
 
 
         it "re-renders the :edit template" do
           patch :update,
-                id: @contact,
+                id: contact,
                 contact: FactoryGirl.attributes_for(:invalid_contact)
           expect(response).to render_template :edit
         end
