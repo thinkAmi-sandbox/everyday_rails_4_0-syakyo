@@ -248,7 +248,6 @@ describe ContactsController do
 
     describe 'GET #edit' do
       it "requires login" do
-        # contact = FactoryGirl.create(:contact)
         get :edit, id: contact
 
         expect(response).to require_login
@@ -259,7 +258,7 @@ describe ContactsController do
     describe 'POST #create' do
       it "requires login" do
         post :create,
-             id: FactoryGirl.create(:contact),
+             id: contact,
              contact: FactoryGirl.attributes_for(:contact)
 
         expect(response).to require_login
@@ -270,7 +269,7 @@ describe ContactsController do
     describe 'PATCH #update' do
       it "requires login" do
         patch :update,
-              id: FactoryGirl.create(:contact),
+              id: contact,
               contact: FactoryGirl.attributes_for(:contact)
 
         expect(response).to require_login
@@ -280,7 +279,7 @@ describe ContactsController do
 
     describe 'DELETE #destroy' do
       it "requires login" do
-        delete :destroy, id: FactoryGirl.create(:contact)
+        delete :destroy, id: contact
         expect(response).to require_login
       end
     end
