@@ -23,6 +23,18 @@ feature "News releases" do
   end
 
   context "as a guest" do
-    scenario "reads a news release"
+    scenario "reads a news release" do
+      news_cfo = FactoryGirl.create(:news_cfo)
+
+      visit root_path
+      click_link "News"
+
+      expect(page).not_to have_content "Today, BigCo's CFO announced record growth."
+      expect(page).not_to have_content "Add News Release"
+
+      click_link "2013-08-01: Record profits for BigCo!"
+
+      expect(page).to have_content "Today, BigCo's CFO announced record growth."
+    end
   end
 end
