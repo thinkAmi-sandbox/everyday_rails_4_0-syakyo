@@ -5,3 +5,11 @@ Each chapter's progress has a specific branch in this repository. See chapter 1 
 Using Git, you can check out each version by name. See details in the book.
 
 If you're not comfortable with Git, you can also use GitHub's handy branch/tag filter to select a specific tag and browse the source code online. To learn more about Git, I recommend the free resources [Git Immersion](http://gitimmersion.com/) or [Try Git](http://www.codeschool.com/courses/try-git).
+
+
+## Getting Started
+
+1. git clone
+2. bundle install --path vendor/bundle
+3. bundle exec rake db:migrate
+4. bundle exec rake db:test:clone
